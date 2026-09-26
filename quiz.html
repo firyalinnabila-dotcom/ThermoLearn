@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz | ThermoLearn</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7faff;
+            color: #17233c;
+        }
+
+        nav {
+            height: 80px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 8%;
+
+            border-bottom: 1px solid #e5ebf3;
+        }
+
+        .logo {
+            color: #1479e9;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 28px;
+
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #28344d;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #1479e9;
+        }
+
+        .hero {
+            max-width: 1000px;
+            margin: auto;
+
+            padding: 55px 25px 25px;
+        }
+
+        .label {
+            color: #1479e9;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            color: #68758a;
+        }
+
+        .quiz-container {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 20px 25px 70px;
+        }
+
+        .question {
+            background: white;
+
+            padding: 30px;
+
+            margin-bottom: 20px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 25px rgba(30, 80, 130, 0.07);
+        }
+
+        .question-number {
+            color: #1479e9;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .question h3 {
+            margin: 10px 0 20px;
+            line-height: 1.5;
+        }
+
+        .option {
+            display: block;
+
+            padding: 14px 16px;
+
+            margin: 10px 0;
+
+            border: 1px solid #dce5ef;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #1479e9;
+            background: #f4f9ff;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        .submit-button {
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #1479e9;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background: #0968cf;
+        }
+
+        #result {
+            display: none;
+
+            margin-top: 30px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 16px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px rgba(30, 80, 130, 0.07);
+        }
+
+        #score {
+            font-size: 42px;
+
+            color: #1479e9;
+
+            font-weight: bold;
+
+            margin: 10px 0;
+        }
+
+        #message {
+            color: #65748b;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 20px;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            ThermoLearn
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="learn.html">
+                    Learn
+                </a>
+            </li>
+
+            <li>
+                <a href="simulation.html">
+                    Simulation
+                </a>
+            </li>
+
+            <li>
+                <a href="calculator.html">
+                    Calculator
+                </a>
+            </li>
+
+            <li>
+                <a href="quiz.html">
+                    Quiz
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- HEADER -->
+
+    <section class="hero">
+
+        <div class="label">
+            KNOWLEDGE CHECK
+        </div>
+
+        <h1>
+            Thermodynamics Quiz
+        </h1>
+
+        <p>
+            Uji pemahamanmu mengenai konsep dasar
+            termodinamika, sistem, energi, dan hukum pertama.
+        </p>
+
+    </section>
+
+
+    <!-- QUIZ -->
+
+    <main class="quiz-container">
+
+
+        <!-- QUESTION 1 -->
+
+        <div class="question">
+
+            <div class="question-number">
+                QUESTION 01
+            </div>
+
+            <h3>
+                Apa yang dimaksud dengan system
+                dalam termodinamika?
+            </h3>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q1"
+                    value="A">
+
+                Lingkungan di luar sistem
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q1"
+                    value="B">
+
+                Bagian tertentu yang dipilih
+                untuk dianalisis
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q1"
+                    value="C">
+
+                Seluruh alam semesta
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q1"
+                    value="D">
+
+                Hanya energi dalam sistem
+            </label>
+
+        </div>
+
+
+        <!-- QUESTION 2 -->
+
+        <div class="question">
+
+            <div class="question-number">
+                QUESTION 02
+            </div>
+
+            <h3>
+                Pada isolated system, apa yang dapat
+                melewati boundary?
+            </h3>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q2"
+                    value="A">
+
+                Massa saja
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q2"
+                    value="B">
+
+                Energi saja
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q2"
+                    value="C">
+
+                Massa dan energi
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q2"
+                    value="D">
+
+                Tidak ada massa maupun energi
+            </label>
+
+        </div>
+
+
+        <!-- QUESTION 3 -->
+
+        <div class="question">
+
+            <div class="question-number">
+                QUESTION 03
+            </div>
+
+            <h3>
+                Apa persamaan First Law of Thermodynamics
+                yang digunakan ThermoLearn?
+            </h3>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q3"
+                    value="A">
+
+                ΔU = Q + W
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q3"
+                    value="B">
+
+                ΔU = Q − W
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q3"
+                    value="C">
+
+                ΔU = W − Q
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q3"
+                    value="D">
+
+                ΔU = Q × W
+            </label>
+
+        </div>
+
+
+        <!-- QUESTION 4 -->
+
+        <div class="question">
+
+            <div class="question-number">
+                QUESTION 04
+            </div>
+
+            <h3>
+                Jika Q = 500 kJ dan W = 200 kJ,
+                berapakah ΔU?
+            </h3>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q4"
+                    value="A">
+
+                200 kJ
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q4"
+                    value="B">
+
+                300 kJ
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q4"
+                    value="C">
+
+                700 kJ
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q4"
+                    value="D">
+
+                −300 kJ
+            </label>
+
+        </div>
+
+
+        <!-- QUESTION 5 -->
+
+        <div class="question">
+
+            <div class="question-number">
+                QUESTION 05
+            </div>
+
+            <h3>
+                Nilai quality (x) = 0.50 pada saturated
+                mixture menunjukkan kondisi...
+            </h3>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q5"
+                    value="A">
+
+                100% liquid
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q5"
+                    value="B">
+
+                100% vapor
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q5"
+                    value="C">
+
+                50% liquid dan 50% vapor
+            </label>
+
+            <label class="option">
+                <input
+                    type="radio"
+                    name="q5"
+                    value="D">
+
+                25% liquid dan 75% vapor
+            </label>
+
+        </div>
+
+
+        <button
+            class="submit-button"
+            id="submitQuiz">
+
+            Submit Quiz
+
+        </button>
+
+
+        <!-- RESULT -->
+
+        <div id="result">
+
+            <div>
+                Your Score
+            </div>
+
+            <div id="score">
+                0 / 5
+            </div>
+
+            <div id="message">
+                Hasil quiz akan muncul di sini.
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <script>
+
+        const correctAnswers = {
+
+            q1: "B",
+
+            q2: "D",
+
+            q3: "B",
+
+            q4: "B",
+
+            q5: "C"
+
+        };
+
+
+        document
+            .getElementById("submitQuiz")
+            .addEventListener(
+                "click",
+                function () {
+
+
+                    let score = 0;
+
+
+                    for (
+                        const question in correctAnswers
+                    ) {
+
+                        const answer =
+                            document.querySelector(
+                                'input[name="' +
+                                question +
+                                '"]:checked'
+                            );
+
+
+                        if (
+                            answer &&
+                            answer.value ===
+                            correctAnswers[question]
+                        ) {
+
+                            score++;
+
+                        }
+
+                    }
+
+
+                    document
+                        .getElementById("score")
+                        .textContent =
+                        score + " / 5";
+
+
+                    let message;
+
+
+                    if (score === 5) {
+
+                        message =
+                            "Excellent! Kamu menguasai konsep dasar termodinamika.";
+
+                    }
+
+                    else if (score >= 3) {
+
+                        message =
+                            "Good job! Pemahamanmu sudah cukup baik. Coba review materi yang masih kurang.";
+
+                    }
+
+                    else {
+
+                        message =
+                            "Keep learning! Silakan pelajari kembali materi ThermoLearn kemudian coba quiz lagi.";
+
+                    }
+
+
+                    document
+                        .getElementById("message")
+                        .textContent =
+                        message;
+
+
+                    document
+                        .getElementById("result")
+                        .style.display =
+                        "block";
+
+
+                    document
+                        .getElementById("result")
+                        .scrollIntoView({
+                            behavior: "smooth"
+                        });
+
+                }
+            );
+
+    </script>
+
+
+</body>
+
+</html>

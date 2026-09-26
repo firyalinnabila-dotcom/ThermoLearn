@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Simulation | ThermoLearn</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7faff;
+            color: #17233c;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 80px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 8%;
+
+            border-bottom: 1px solid #e5ebf3;
+        }
+
+        .logo {
+            color: #1479e9;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #28344d;
+        }
+
+        nav a:hover {
+            color: #1479e9;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .hero {
+            max-width: 1100px;
+            margin: auto;
+
+            padding: 60px 25px 30px;
+        }
+
+        .label {
+            color: #1479e9;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            color: #66738a;
+            font-size: 17px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+
+            padding: 20px 25px 80px;
+        }
+
+        .simulation-card {
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 35px rgba(30, 80, 130, 0.08);
+        }
+
+
+        /* ================= TANK ================= */
+
+        .tank-area {
+            height: 360px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tank {
+            position: relative;
+
+            width: 320px;
+            height: 260px;
+
+            border-left: 7px solid #536f8e;
+            border-right: 7px solid #536f8e;
+            border-bottom: 7px solid #536f8e;
+
+            border-radius: 0 0 25px 25px;
+
+            overflow: hidden;
+
+            background: #eef8ff;
+        }
+
+
+        /* ================= WATER ================= */
+
+        #water {
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 60%;
+
+            background:
+                linear-gradient(
+                    to top,
+                    #078ee0,
+                    #71d5f8
+                );
+
+            transition: height 0.2s ease;
+        }
+
+
+        /* ================= PARTICLES ================= */
+
+        .particle {
+            position: absolute;
+
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            z-index: 5;
+        }
+
+        #particle1 {
+            left: 50px;
+            bottom: 70px;
+        }
+
+        #particle2 {
+            left: 110px;
+            bottom: 110px;
+        }
+
+        #particle3 {
+            left: 180px;
+            bottom: 80px;
+        }
+
+        #particle4 {
+            left: 230px;
+            bottom: 130px;
+        }
+
+        #particle5 {
+            left: 140px;
+            bottom: 45px;
+        }
+
+
+        /* ================= RESULTS ================= */
+
+        .results {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-top: 25px;
+        }
+
+        .result {
+
+            padding: 22px;
+
+            background: #f8fbff;
+
+            border: 1px solid #e5edf7;
+
+            border-radius: 15px;
+        }
+
+        .result-title {
+
+            font-size: 14px;
+
+            color: #68758c;
+        }
+
+        .result-value {
+
+            margin-top: 8px;
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #1479e9;
+        }
+
+
+        /* ================= CONTROLS ================= */
+
+        .controls {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 25px;
+
+            margin-top: 30px;
+        }
+
+        .control {
+
+            background: #f8fbff;
+
+            border-radius: 15px;
+
+            padding: 25px;
+        }
+
+        .control label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+
+        /*
+            SLIDER
+        */
+
+        input[type="range"] {
+
+            display: block;
+
+            width: 100%;
+
+            height: 8px;
+
+            cursor: pointer;
+
+            accent-color: #1479e9;
+
+            appearance: auto;
+
+        }
+
+
+        .control-value {
+
+            margin-top: 12px;
+
+            color: #1479e9;
+
+            font-weight: bold;
+
+            font-size: 18px;
+        }
+
+
+        /* ================= EXPLANATION ================= */
+
+        .explanation {
+
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #eef7ff;
+
+            border-radius: 15px;
+        }
+
+        .explanation h3 {
+
+            margin-top: 0;
+
+            color: #1479e9;
+        }
+
+        .explanation p {
+
+            line-height: 1.7;
+
+            color: #5d6b81;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        button {
+
+            margin-top: 25px;
+
+            padding: 13px 25px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #1479e9;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+        button:hover {
+
+            background: #0968cf;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .results {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .controls {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            nav {
+
+                padding: 0 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            ThermoLearn
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="learn.html">
+                    Learn
+                </a>
+            </li>
+
+            <li>
+                <a href="simulation.html">
+                    Simulation
+                </a>
+            </li>
+
+            <li>
+                <a href="calculator.html">
+                    Calculator
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <section class="hero">
+
+        <div class="label">
+            INTERACTIVE SIMULATION
+        </div>
+
+        <h1>
+            Thermodynamic Simulation
+        </h1>
+
+        <p>
+            Amati hubungan antara volume,
+            temperatur, tekanan, dan energi
+            kinetik partikel gas.
+        </p>
+
+    </section>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <div class="simulation-card">
+
+
+            <!-- ================= TANK ================= -->
+
+            <div class="tank-area">
+
+                <div class="tank">
+
+                    <div id="water"></div>
+
+
+                    <div
+                        class="particle"
+                        id="particle1">
+                    </div>
+
+                    <div
+                        class="particle"
+                        id="particle2">
+                    </div>
+
+                    <div
+                        class="particle"
+                        id="particle3">
+                    </div>
+
+                    <div
+                        class="particle"
+                        id="particle4">
+                    </div>
+
+                    <div
+                        class="particle"
+                        id="particle5">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RESULTS ================= -->
+
+            <div class="results">
+
+
+                <div class="result">
+
+                    <div class="result-title">
+                        Pressure
+                    </div>
+
+                    <div class="result-value">
+
+                        <span id="pressureValue">
+                            100.0
+                        </span>
+
+                        kPa
+
+                    </div>
+
+                </div>
+
+
+                <div class="result">
+
+                    <div class="result-title">
+                        Volume
+                    </div>
+
+                    <div class="result-value">
+
+                        <span id="volumeValue">
+                            1.00
+                        </span>
+
+                        m³
+
+                    </div>
+
+                </div>
+
+
+                <div class="result">
+
+                    <div class="result-title">
+                        Temperature
+                    </div>
+
+                    <div class="result-value">
+
+                        <span id="temperatureValue">
+                            300
+                        </span>
+
+                        K
+
+                    </div>
+
+                </div>
+
+
+                <div class="result">
+
+                    <div class="result-title">
+                        Particle Energy
+                    </div>
+
+                    <div class="result-value">
+
+                        <span id="energyValue">
+                            100
+                        </span>
+
+                        %
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= CONTROLS ================= -->
+
+            <div class="controls">
+
+
+                <!-- VOLUME -->
+
+                <div class="control">
+
+                    <label>
+                        Volume (V)
+                    </label>
+
+                    <input
+                        id="volumeSlider"
+                        type="range"
+                        min="0.5"
+                        max="2"
+                        value="1"
+                        step="0.01">
+
+                    <div class="control-value">
+
+                        <span id="volumeControlValue">
+                            1.00
+                        </span>
+
+                        m³
+
+                    </div>
+
+                </div>
+
+
+                <!-- TEMPERATURE -->
+
+                <div class="control">
+
+                    <label>
+                        Temperature (T)
+                    </label>
+
+                    <input
+                        id="temperatureSlider"
+                        type="range"
+                        min="200"
+                        max="600"
+                        value="300"
+                        step="1">
+
+                    <div class="control-value">
+
+                        <span id="temperatureControlValue">
+                            300
+                        </span>
+
+                        K
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RESET ================= -->
+
+            <button id="resetButton">
+
+                Reset Simulation
+
+            </button>
+
+
+            <!-- ================= EXPLANATION ================= -->
+
+            <div class="explanation">
+
+                <h3>
+                    What is happening?
+                </h3>
+
+                <p id="interpretationText">
+
+                    Geser slider untuk melihat
+                    perubahan sistem.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /*
+        ====================================================
+        AMBIL ELEMEN HTML
+        ====================================================
+        */
+
+        const volumeSlider =
+            document.getElementById(
+                "volumeSlider"
+            );
+
+
+        const temperatureSlider =
+            document.getElementById(
+                "temperatureSlider"
+            );
+
+
+        const pressureValue =
+            document.getElementById(
+                "pressureValue"
+            );
+
+
+        const volumeValue =
+            document.getElementById(
+                "volumeValue"
+            );
+
+
+        const temperatureValue =
+            document.getElementById(
+                "temperatureValue"
+            );
+
+
+        const energyValue =
+            document.getElementById(
+                "energyValue"
+            );
+
+
+        const volumeControlValue =
+            document.getElementById(
+                "volumeControlValue"
+            );
+
+
+        const temperatureControlValue =
+            document.getElementById(
+                "temperatureControlValue"
+            );
+
+
+        const water =
+            document.getElementById(
+                "water"
+            );
+
+
+        const explanation =
+            document.getElementById(
+                "interpretationText"
+            );
+
+
+        const resetButton =
+            document.getElementById(
+                "resetButton"
+            );
+
+
+        const particles =
+            document.querySelectorAll(
+                ".particle"
+            );
+
+
+        /*
+        ====================================================
+        FUNGSI UTAMA
+        ====================================================
+        */
+
+        function calculateSimulation() {
+
+
+            /*
+            Ambil nilai slider
+            */
+
+            const V =
+                parseFloat(
+                    volumeSlider.value
+                );
+
+
+            const T =
+                parseFloat(
+                    temperatureSlider.value
+                );
+
+
+            /*
+            =================================================
+            PERSAMAAN GAS IDEAL SEDERHANA
+
+            P = P0 × (T/T0) × (V0/V)
+
+            Kondisi awal:
+            P0 = 100 kPa
+            T0 = 300 K
+            V0 = 1 m³
+            =================================================
+            */
+
+            const P =
+                100 *
+                (T / 300) *
+                (1 / V);
+
+
+            /*
+            =================================================
+            ENERGI KINETIK RELATIF
+
+            Energi ∝ Temperatur
+            =================================================
+            */
+
+            const energy =
+                (T / 300) * 100;
+
+
+            /*
+            =================================================
+            UPDATE ANGKA
+            =================================================
+            */
+
+            pressureValue.textContent =
+                P.toFixed(1);
+
+
+            volumeValue.textContent =
+                V.toFixed(2);
+
+
+            temperatureValue.textContent =
+                T.toFixed(0);
+
+
+            energyValue.textContent =
+                energy.toFixed(0);
+
+
+            volumeControlValue.textContent =
+                V.toFixed(2);
+
+
+            temperatureControlValue.textContent =
+                T.toFixed(0);
+
+
+            /*
+            =================================================
+            UPDATE VISUAL VOLUME
+            =================================================
+            */
+
+            const waterHeight =
+                30 +
+                ((V - 0.5) / 1.5) * 60;
+
+
+            water.style.height =
+                waterHeight + "%";
+
+
+            /*
+            =================================================
+            UPDATE KECEPATAN PARTIKEL
+            =================================================
+            */
+
+            const duration =
+                Math.max(
+                    0.3,
+                    2.5 - (T - 200) / 200
+                );
+
+
+            particles.forEach(
+                function(particle, index) {
+
+                    particle.style.animation =
+                        "particleMove " +
+                        (duration + index * 0.1) +
+                        "s infinite alternate ease-in-out";
+
+                }
+            );
+
+
+            /*
+            =================================================
+            PENJELASAN
+            =================================================
+            */
+
+            if (V < 0.8) {
+
+                explanation.textContent =
+                    "Volume diperkecil. Ketika volume berkurang, tekanan meningkat karena partikel gas memiliki ruang yang lebih kecil.";
+
+            }
+
+            else if (V > 1.4) {
+
+                explanation.textContent =
+                    "Volume diperbesar. Dengan temperatur tetap, tekanan gas menurun.";
+
+            }
+
+            else if (T > 450) {
+
+                explanation.textContent =
+                    "Temperatur meningkat. Energi kinetik rata-rata partikel meningkat sehingga tekanan juga meningkat.";
+
+            }
+
+            else if (T < 250) {
+
+                explanation.textContent =
+                    "Temperatur rendah menyebabkan energi kinetik rata-rata partikel lebih rendah.";
+
+            }
+
+            else {
+
+                explanation.textContent =
+                    "Sistem berada pada kondisi relatif normal. Coba geser kedua slider untuk mengamati perubahan.";
+
+            }
+
+        }
+
+
+        /*
+        ====================================================
+        SLIDER VOLUME
+        ====================================================
+        */
+
+        volumeSlider.addEventListener(
+            "input",
+            calculateSimulation
+        );
+
+
+        /*
+        ====================================================
+        SLIDER TEMPERATURE
+        ====================================================
+        */
+
+        temperatureSlider.addEventListener(
+            "input",
+            calculateSimulation
+        );
+
+
+        /*
+        ====================================================
+        RESET
+        ====================================================
+        */
+
+        resetButton.addEventListener(
+            "click",
+            function() {
+
+                volumeSlider.value = 1;
+
+                temperatureSlider.value = 300;
+
+                calculateSimulation();
+
+            }
+        );
+
+
+        /*
+        ====================================================
+        ANIMASI PARTIKEL
+        ====================================================
+        */
+
+        const style =
+            document.createElement("style");
+
+
+        style.textContent = `
+
+            @keyframes particleMove {
+
+                0% {
+                    transform: translate(0, 0);
+                }
+
+                25% {
+                    transform: translate(20px, -15px);
+                }
+
+                50% {
+                    transform: translate(-15px, -25px);
+                }
+
+                75% {
+                    transform: translate(25px, 10px);
+                }
+
+                100% {
+                    transform: translate(-20px, 20px);
+                }
+
+            }
+
+        `;
+
+
+        document.head.appendChild(style);
+
+
+        /*
+        ====================================================
+        JALANKAN SEKALI SAAT HALAMAN DIBUKA
+        ====================================================
+        */
+
+        calculateSimulation();
+
+    </script>
+
+
+</body>
+
+</html>

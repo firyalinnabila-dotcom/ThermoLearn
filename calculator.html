@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Calculator | ThermoLearn</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7faff;
+            color: #17233c;
+        }
+
+        nav {
+            height: 80px;
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 8%;
+
+            border-bottom: 1px solid #e5ebf3;
+        }
+
+        .logo {
+            color: #1479e9;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #28344d;
+        }
+
+        nav a:hover {
+            color: #1479e9;
+        }
+
+        .hero {
+            max-width: 1100px;
+            margin: auto;
+
+            padding: 60px 25px 30px;
+        }
+
+        .label {
+            color: #1479e9;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            color: #66738a;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+
+            padding: 20px 25px 80px;
+        }
+
+        .calculator {
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 35px rgba(30, 80, 130, 0.08);
+        }
+
+        .calculator h2 {
+            margin-top: 0;
+        }
+
+        .formula {
+            padding: 20px;
+
+            background: #eef7ff;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            color: #1479e9;
+
+            margin: 25px 0;
+        }
+
+        .inputs {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #d9e3ef;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #1479e9;
+        }
+
+        .input-group small {
+            display: block;
+
+            margin-top: 6px;
+
+            color: #758197;
+        }
+
+        button {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #1479e9;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0968cf;
+        }
+
+        .result {
+            display: none;
+
+            margin-top: 30px;
+
+            padding: 30px;
+
+            background: #f0f8ff;
+
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-title {
+            color: #65748b;
+
+            font-size: 15px;
+        }
+
+        .result-value {
+            margin-top: 10px;
+
+            color: #1479e9;
+
+            font-size: 38px;
+
+            font-weight: bold;
+        }
+
+        .calculation {
+            margin-top: 25px;
+
+            padding: 20px;
+
+            background: white;
+
+            border-radius: 10px;
+
+            text-align: left;
+
+            line-height: 1.8;
+
+            color: #536177;
+        }
+
+        .explanation {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #fff;
+
+            border: 1px solid #e5edf7;
+
+            border-radius: 15px;
+
+            line-height: 1.7;
+        }
+
+        @media (max-width: 700px) {
+
+            .inputs {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            nav ul {
+                gap: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            ThermoLearn
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="learn.html">
+                    Learn
+                </a>
+            </li>
+
+            <li>
+                <a href="simulation.html">
+                    Simulation
+                </a>
+            </li>
+
+            <li>
+                <a href="calculator.html">
+                    Calculator
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- HEADER -->
+
+    <section class="hero">
+
+        <div class="label">
+            THERMODYNAMICS CALCULATOR
+        </div>
+
+        <h1>
+            First Law Calculator
+        </h1>
+
+        <p>
+            Hitung perubahan energi internal
+            berdasarkan heat dan work.
+        </p>
+
+    </section>
+
+
+    <!-- CALCULATOR -->
+
+    <main class="container">
+
+        <div class="calculator">
+
+            <h2>
+                Energy Balance Calculator
+            </h2>
+
+            <p>
+                Masukkan nilai heat dan work
+                untuk menghitung perubahan energi
+                internal sistem.
+            </p>
+
+
+            <div class="formula">
+
+                ΔU = Q − W
+
+            </div>
+
+
+            <div class="inputs">
+
+
+                <!-- HEAT -->
+
+                <div class="input-group">
+
+                    <label for="heat">
+
+                        Heat (Q)
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="heat"
+                        value="500"
+                        step="0.01">
+
+                    <small>
+                        kJ
+                    </small>
+
+                </div>
+
+
+                <!-- WORK -->
+
+                <div class="input-group">
+
+                    <label for="work">
+
+                        Work (W)
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="work"
+                        value="200"
+                        step="0.01">
+
+                    <small>
+                        kJ
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button id="calculateButton">
+
+                Calculate ΔU
+
+            </button>
+
+
+            <!-- RESULT -->
+
+            <div
+                class="result"
+                id="result">
+
+                <div class="result-title">
+
+                    Perubahan Internal Energy
+
+                </div>
+
+                <div class="result-value">
+
+                    <span id="deltaU">
+                        0.00
+                    </span>
+
+                    kJ
+
+                </div>
+
+
+                <div
+                    class="calculation"
+                    id="calculation">
+
+                </div>
+
+            </div>
+
+
+            <div class="explanation">
+
+                <strong>
+                    First Law of Thermodynamics
+                </strong>
+
+                <p>
+                    Perubahan energi internal suatu
+                    sistem ditentukan oleh jumlah heat
+                    yang masuk ke sistem dikurangi work
+                    yang dilakukan oleh sistem.
+                </p>
+
+                <p>
+
+                    <strong>
+                        ΔU = Q − W
+                    </strong>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const heatInput =
+            document.getElementById("heat");
+
+
+        const workInput =
+            document.getElementById("work");
+
+
+        const calculateButton =
+            document.getElementById(
+                "calculateButton"
+            );
+
+
+        const result =
+            document.getElementById(
+                "result"
+            );
+
+
+        const deltaU =
+            document.getElementById(
+                "deltaU"
+            );
+
+
+        const calculation =
+            document.getElementById(
+                "calculation"
+            );
+
+
+        calculateButton.addEventListener(
+            "click",
+            function () {
+
+
+                const Q =
+                    parseFloat(
+                        heatInput.value
+                    );
+
+
+                const W =
+                    parseFloat(
+                        workInput.value
+                    );
+
+
+                if (
+                    isNaN(Q) ||
+                    isNaN(W)
+                ) {
+
+                    alert(
+                        "Masukkan nilai Q dan W terlebih dahulu."
+                    );
+
+                    return;
+
+                }
+
+
+                const U = Q - W;
+
+
+                deltaU.textContent =
+                    U.toFixed(2);
+
+
+                calculation.innerHTML =
+
+                    "ΔU = Q − W<br><br>" +
+
+                    "ΔU = " +
+                    Q.toFixed(2) +
+                    " − " +
+                    W.toFixed(2) +
+                    "<br><br>" +
+
+                    "ΔU = " +
+                    U.toFixed(2) +
+                    " kJ";
+
+
+                result.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

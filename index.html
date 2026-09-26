@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ThermoLearn | Interactive Thermodynamics</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8fc;
+            color: #172033;
+        }
+
+        /* NAVBAR */
+        nav {
+            height: 75px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 15px;
+        }
+
+        nav ul li a:hover {
+            color: #2563eb;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 600px;
+            padding: 80px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+        }
+
+        .hero-content {
+            max-width: 620px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* FORMULA CARD */
+        .formula-card {
+            width: 400px;
+            height: 330px;
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15);
+        }
+
+        .formula {
+            font-size: 42px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 25px;
+        }
+
+        .formula-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .formula-card p {
+            color: #64748b;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 90px 8%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 30px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #172033;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav ul {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .formula-card {
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+   <nav>
+
+    <div class="logo">
+        ThermoLearn
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+
+        <li>
+            <a href="learn.html">Learn</a>
+        </li>
+
+        <li>
+            <a href="simulation.html">Simulation</a>
+        </li>
+
+        <li>
+            <a href="calculator.html">Calculator</a>
+        </li>
+
+        <li>
+            <a href="quiz.html">Quiz</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                Interactive Thermodynamics Learning
+            </div>
+
+            <h1>
+                Understand
+                <span>Thermodynamics.</span>
+            </h1>
+
+            <p>
+                Pelajari konsep termodinamika melalui materi,
+                visualisasi interaktif, simulasi, kalkulator,
+                dan latihan soal.
+            </p>
+
+            <a href="learn.html" class="btn">
+                Start Learning →
+            </a>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <div class="formula">
+                ΔU = Q − W
+            </div>
+
+            <h3>
+                First Law of Thermodynamics
+            </h3>
+
+            <p>
+                Energy cannot be created or destroyed.
+                It can only be transferred or transformed.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <div class="section-title">
+
+            <h2>
+                Learn Thermodynamics Your Way
+            </h2>
+
+            <p>
+                Explore, understand, calculate, and practice.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="icon">📚</div>
+
+                <h3>
+                    Learn
+                </h3>
+
+                <p>
+                    Pelajari konsep dasar thermodynamics
+                    secara sistematis dan mudah dipahami.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🔬</div>
+
+                <h3>
+                    Simulation
+                </h3>
+
+                <p>
+                    Visualisasikan proses thermodynamics
+                    melalui simulasi interaktif.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🧮</div>
+
+                <h3>
+                    Calculator
+                </h3>
+
+                <p>
+                    Hitung berbagai parameter dan
+                    persamaan thermodynamics.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📝</div>
+
+                <h3>
+                    Quiz
+                </h3>
+
+                <p>
+                    Uji pemahamanmu melalui latihan
+                    soal dan quiz interaktif.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 ThermoLearn
+        </p>
+
+    </footer>
+
+</body>
+</html>
